@@ -47,7 +47,7 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
         localDataSource.cacheNumberTrivia(remoteTrivia);
         return Right<Failure, NumberTrivia>(remoteTrivia);
       } on ServerException {
-        return Left<Failure, NumberTrivia>(ServerFailure());
+        return const Left<Failure, NumberTrivia>(Failure.serverFailure());
       }
     } else {
       try {
@@ -55,7 +55,7 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
             await localDataSource.getLastNumberTrivia();
         return Right<Failure, NumberTrivia>(localTrivia);
       } on CacheException {
-        return Left<Failure, NumberTrivia>(CacheFailure());
+        return const Left<Failure, NumberTrivia>(Failure.cacheFailure());
       }
     }
   }

@@ -11,9 +11,7 @@ class InputConverter {
       }
       return Right<Failure, int>(integer);
     } on FormatException {
-      return Left<Failure, int>(InvalidInputFailure());
+      return const Left<Failure, int>(Failure.inputFailedFailure());
     }
   }
 }
-
-class InvalidInputFailure extends Failure {}

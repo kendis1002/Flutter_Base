@@ -1,19 +1,12 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-abstract class NumberTriviaEvent extends Equatable {
-  const NumberTriviaEvent({this.properties = const <dynamic>[]});
+part 'number_trivia_event.freezed.dart';
 
-  final List<dynamic> properties;
+@freezed
+class NumberTriviaEvent with _$NumberTriviaEvent {
+  const factory NumberTriviaEvent.getTriviaForConcreteNumber(
+      String numberString) =
+      GetTriviaForConcreteNumber;
 
-  @override
-  List<Object?> get props => properties;
+  const factory NumberTriviaEvent.getGetTriviaForRandomNumber() = GetTriviaForRandomNumber;
 }
-
-class GetTriviaForConcreteNumber extends NumberTriviaEvent {
-  GetTriviaForConcreteNumber(this.numberString)
-      : super(properties: <dynamic>[numberString]);
-
-  final String numberString;
-}
-
-class GetTriviaForRandomNumber extends NumberTriviaEvent {}
